@@ -8,7 +8,7 @@ const server = app.listen(3000, () =>{
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
-
+//route 생성
 app.get('/', function (req, res) {
     res.render('index.html')
 });
@@ -17,7 +17,7 @@ app.get('/posts', function (req, res) {
     res.send('about posts')
 });
 
-
+//db 연결
 var mysql = require('mysql');
 var pool  = mysql.createPool({
   connectionLimit : 10,
@@ -27,6 +27,7 @@ var pool  = mysql.createPool({
   database        : ''
 });
 
+//db JSON view
 app.get('/db', function (req, res) {
     pool.getConnection(function(err, connection) {
         if (err) throw err; // not connected!
